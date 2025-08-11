@@ -41,6 +41,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
     childTaskIds: task.childTaskIds
   });
 
+  const [isWorkingOn, setIsWorkingOn] = useState(task.isWorkingOn);
+
   const [newFeedback, setNewFeedback] = useState('');
   const [editingFeedback, setEditingFeedback] = useState<Feedback | null>(null);
   const [editFeedbackContent, setEditFeedbackContent] = useState('');
@@ -66,6 +68,11 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
     if (canEditTimeAndProgress) {
       updates.estimatedHours = parseFloat(editForm.estimatedHours);
       updates.dueDate = editForm.dueDate ? new Date(editForm.dueDate) : undefined;
+    }
+
+    // 現在作業中の状態を更新
+    if (task.assigneeId === currentUser.id && task.childTaskIds.length === 0) {
+      updates.isWorkingOn = isWorkingOn;
     }
 
     onUpdate(task.id, updates);
@@ -270,8 +277,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                 <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
                   <input
                     type="checkbox"
-                    checked={task.isWorkingOn}
-                    onChange={handleWorkingOnToggle}
+                    checked={isWorkingOn}
+                    onChange={(e) => setIsWorkingOn(e.target.checked)}
                   />
                   現在作業中
                 </label>
