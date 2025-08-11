@@ -246,16 +246,16 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
               <label className="form-label">子タスク</label>
               <select
                 className="form-select"
-                multiple
-                value={editForm.childTaskIds}
+                value={editForm.childTaskIds[0] || ''}
                 onChange={(e) => {
-                  const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
-                  setEditForm(prev => ({ ...prev, childTaskIds: selectedOptions }));
-                }}
-                style={{ 
-                  maxHeight: '150px'
+                  const selectedValue = e.target.value;
+                  setEditForm(prev => ({ 
+                    ...prev, 
+                    childTaskIds: selectedValue ? [selectedValue] : [] 
+                  }));
                 }}
               >
+                <option value="">子タスクなし</option>
                 {tasks.filter(t => t.id !== task.id).map(t => (
                   <option key={t.id} value={t.id}>
                     {t.name}

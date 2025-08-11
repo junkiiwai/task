@@ -183,16 +183,13 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
               <label className="form-label">子タスク</label>
               <select
                 className="form-select"
-                multiple
-                value={selectedChildTasks}
+                value={selectedChildTasks[0] || ''}
                 onChange={(e) => {
-                  const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
-                  setSelectedChildTasks(selectedOptions);
-                }}
-                style={{ 
-                  maxHeight: '150px'
+                  const selectedValue = e.target.value;
+                  setSelectedChildTasks(selectedValue ? [selectedValue] : []);
                 }}
               >
+                <option value="">子タスクなし</option>
                 {tasks.map(task => (
                   <option key={task.id} value={task.id}>
                     {task.name}
