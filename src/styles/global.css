@@ -324,7 +324,7 @@ body {
 @media (min-width: 600px) and (max-width: 999px) {
   .create-task-modal,
   .edit-task-modal {
-    max-width: 479px !important;
+    max-width: 800px !important;
   }
   
   .feedback-section-small {
