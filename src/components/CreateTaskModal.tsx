@@ -75,6 +75,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
       zIndex: 1000
     }}>
       <div className="card create-task-modal" style={{ 
+        width: '480px',
         maxWidth: '80%', 
         maxHeight: '90vh', 
         overflow: 'auto',

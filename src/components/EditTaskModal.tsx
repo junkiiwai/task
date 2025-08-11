@@ -124,6 +124,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
       zIndex: 1000
     }}>
       <div className="card edit-task-modal" style={{ 
+        width: '480px',
         maxWidth: '80%', 
         maxHeight: '90vh', 
         overflow: 'auto',
