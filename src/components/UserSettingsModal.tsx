@@ -111,6 +111,7 @@ const UserSettingsModal: React.FC<UserSettingsModalProps> = ({
                 <button
                   className="btn btn-secondary"
                   onClick={() => handleEdit(user)}
+                  style={{ marginLeft: '20px' }}
                 >
                   編集
                 </button>

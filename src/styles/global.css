@@ -300,3 +300,50 @@ body {
     grid-template-columns: 1fr auto auto auto auto auto auto !important;
   }
 }
+
+/* 新規作成・タスク編集画面のレスポンシブ対応 */
+@media (max-width: 599px) {
+  .edit-task-modal {
+    max-width: 80% !important;
+  }
+  
+  .edit-task-content {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .feedback-section-small {
+    display: block !important;
+  }
+  
+  .feedback-section-large {
+    display: none !important;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 999px) {
+  .edit-task-modal {
+    max-width: 80% !important;
+  }
+  
+  .feedback-section-small {
+    display: none !important;
+  }
+  
+  .feedback-section-large {
+    display: block !important;
+  }
+}
+
+@media (min-width: 1000px) {
+  .edit-task-modal {
+    max-width: 800px !important;
+  }
+  
+  .feedback-section-small {
+    display: none !important;
+  }
+  
+  .feedback-section-large {
+    display: block !important;
+  }
+}

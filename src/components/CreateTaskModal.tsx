@@ -75,7 +75,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
       zIndex: 1000
     }}>
       <div className="card" style={{ 
-        maxWidth: '600px', 
+        maxWidth: '80%', 
         maxHeight: '90vh', 
         overflow: 'auto',
         position: 'relative'
@@ -162,55 +162,43 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
             />
           </div>
 
-          <div className="form-group">
-            <label className="form-label">親タスク</label>
-            <select
-              className="form-select"
-              value={formData.parentTaskId}
-              onChange={(e) => handleInputChange('parentTaskId', e.target.value)}
-            >
-              <option value="">親タスクなし（最上位タスク）</option>
-              {topLevelTasks.map(task => (
-                <option key={task.id} value={task.id}>
-                  {task.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label className="form-label">子タスク</label>
-            <div style={{ 
-              border: '1px solid #ddd', 
-              borderRadius: '4px', 
-              padding: '10px',
-              maxHeight: '150px',
-              overflow: 'auto'
-            }}>
-              {topLevelTasks.length === 0 ? (
-                <p style={{ color: '#666', textAlign: 'center' }}>
-                  選択可能なタスクがありません
-                </p>
-              ) : (
-                topLevelTasks.map(task => (
-                  <label key={task.id} style={{ 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    marginBottom: '8px',
-                    cursor: 'pointer'
-                  }}>
-                    <input
-                      type="checkbox"
-                      checked={selectedChildTasks.includes(task.id)}
-                      onChange={() => handleChildTaskToggle(task.id)}
-                      style={{ marginRight: '8px' }}
-                    />
+                      <div className="form-group">
+              <label className="form-label">親タスク</label>
+              <select
+                className="form-select"
+                value={formData.parentTaskId}
+                onChange={(e) => handleInputChange('parentTaskId', e.target.value)}
+              >
+                <option value="">親タスクなし（最上位タスク）</option>
+                {tasks.map(task => (
+                  <option key={task.id} value={task.id}>
                     {task.name}
-                  </label>
-                ))
-              )}
+                  </option>
+                ))}
+              </select>
             </div>
-          </div>
+
+            <div className="form-group">
+              <label className="form-label">子タスク</label>
+              <select
+                className="form-select"
+                multiple
+                value={selectedChildTasks}
+                onChange={(e) => {
+                  const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
+                  setSelectedChildTasks(selectedOptions);
+                }}
+                style={{ 
+                  maxHeight: '150px'
+                }}
+              >
+                {tasks.map(task => (
+                  <option key={task.id} value={task.id}>
+                    {task.name}
+                  </option>
+                ))}
+              </select>
+            </div>
 
           <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
             <button type="submit" className="btn btn-primary">

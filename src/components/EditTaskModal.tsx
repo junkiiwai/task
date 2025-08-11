@@ -123,8 +123,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
       justifyContent: 'center',
       zIndex: 1000
     }}>
-      <div className="card" style={{ 
-        maxWidth: '800px', 
+      <div className="card edit-task-modal" style={{ 
+        maxWidth: '80%', 
         maxHeight: '90vh', 
         overflow: 'auto',
         position: 'relative'
@@ -147,7 +147,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
 
         <h2 style={{ marginBottom: '20px' }}>タスク編集</h2>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+        <div className="edit-task-content" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
           {/* 左側：タスク情報 */}
           <div>
             <h3 style={{ marginBottom: '15px' }}>タスク情報</h3>
@@ -242,7 +242,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
             </div>
 
             {/* 現在作業中チェックボックス */}
-            {task.assigneeId === currentUser.id && (
+            {task.assigneeId === currentUser.id && task.childTaskIds.length === 0 && (
               <div className="form-group">
                 <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
                   <input
@@ -263,10 +263,108 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                 削除
               </button>
             </div>
+            
+            {/* 現状・課題↔︎FB（599px以下で表示） */}
+            <div className="feedback-section-small">
+              <h3 style={{ marginBottom: '15px', marginTop: '20px' }}>現状・課題↔︎FB</h3>
+              
+              <div className="form-group">
+                <textarea
+                  className="form-input"
+                  value={newFeedback}
+                  onChange={(e) => setNewFeedback(e.target.value)}
+                  placeholder="作業内容やフィードバックを入力"
+                  rows={3}
+                />
+                <button 
+                  className="btn btn-primary" 
+                  onClick={handleAddFeedback}
+                  disabled={!newFeedback.trim()}
+                  style={{ marginTop: '10px' }}
+                >
+                  保存
+                </button>
+              </div>
+
+              <div style={{ maxHeight: '300px', overflow: 'auto' }}>
+                {feedbacks.map(feedback => {
+                  const feedbackUser = users.find(u => u.id === feedback.userId);
+                  return (
+                    <div key={feedback.id} style={{
+                      border: '1px solid #ddd',
+                      borderRadius: '8px',
+                      padding: '15px',
+                      marginBottom: '10px',
+                      backgroundColor: 'white'
+                    }}>
+                      {editingFeedback?.id === feedback.id ? (
+                        <div>
+                          <textarea
+                            className="form-input"
+                            value={editFeedbackContent}
+                            onChange={(e) => setEditFeedbackContent(e.target.value)}
+                            rows={3}
+                          />
+                          <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+                            <button 
+                              className="btn btn-primary"
+                              onClick={handleSaveFeedback}
+                              disabled={!editFeedbackContent.trim()}
+                            >
+                              保存
+                            </button>
+                            <button 
+                              className="btn btn-secondary"
+                              onClick={() => setEditingFeedback(null)}
+                            >
+                              キャンセル
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div>
+                          <div style={{ 
+                            display: 'flex', 
+                            justifyContent: 'space-between', 
+                            alignItems: 'center',
+                            marginBottom: '10px'
+                          }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                              <span className={`user-color ${feedbackUser?.color || 'yellow'}`} />
+                              <span style={{ fontWeight: '500' }}>{feedbackUser?.name || '不明'}</span>
+                              <span style={{ color: '#666', fontSize: '12px' }}>
+                                {format(feedback.createdAt, 'yyyy/MM/dd HH:mm')}
+                              </span>
+                            </div>
+                            <div style={{ display: 'flex', gap: '5px' }}>
+                              <button
+                                className="btn btn-secondary"
+                                style={{ padding: '4px 8px', fontSize: '12px' }}
+                                onClick={() => handleEditFeedback(feedback)}
+                              >
+                                編集
+                              </button>
+                              <button
+                                className="btn btn-danger"
+                                style={{ padding: '4px 8px', fontSize: '12px' }}
+                                onClick={() => onDeleteFeedback(feedback.id)}
+                              >
+                                削除
+                              </button>
+                            </div>
+                          </div>
+                          <p style={{ margin: 0, lineHeight: '1.5' }}>{feedback.content}</p>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
-          {/* 右側：フィードバック */}
-          <div>
+          {/* 右側：フィードバック（600px以上で表示） */}
+          <div className="feedback-section-large">
             <h3 style={{ marginBottom: '15px' }}>現状・課題↔︎FB</h3>
             
             <div className="form-group">
