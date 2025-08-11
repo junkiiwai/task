@@ -47,7 +47,8 @@ const TaskItem: React.FC<TaskItemProps> = ({
       borderRadius: '8px',
       backgroundColor: 'white',
       cursor: 'pointer',
-      transition: 'all 0.2s'
+      transition: 'all 0.2s',
+      marginBottom: task.childTaskIds.length > 0 ? '2px' : '0px'
     }}>
       {/* メインタスク情報 */}
       <div 

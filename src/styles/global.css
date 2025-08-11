@@ -202,7 +202,7 @@ body {
   }
   
   .task-item {
-    margin: 0 10px 10px 10px;
+    margin: 0px;
   }
   
   .header h1 {
@@ -249,6 +249,30 @@ body {
   
   .task-item > div {
     grid-template-columns: 1fr auto auto auto auto !important;
+  }
+}
+
+@media (min-width: 376px) and (max-width: 599px) {
+  .due-date-column,
+  .hours-column {
+    display: none !important;
+  }
+  
+  .task-item > div {
+    grid-template-columns: 1fr auto auto auto auto !important;
+  }
+  
+  .card {
+    padding: 10px !important;
+  }
+  
+  .btn {
+    padding: 6px 12px !important;
+    font-size: 10px !important;
+  }
+  
+  .btn + div {
+    margin: 15px 0px !important;
   }
 }
 
