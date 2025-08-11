@@ -42,7 +42,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
 
   return (
     <div className={taskClasses} style={{ 
-      padding: '15px',
+      padding: '8px',
       border: '1px solid #ddd',
       borderRadius: '8px',
       backgroundColor: 'white',
@@ -55,25 +55,25 @@ const TaskItem: React.FC<TaskItemProps> = ({
         style={{ 
           display: 'grid',
           gridTemplateColumns: '1fr auto auto auto auto',
-          gap: '15px',
+          gap: '5px',
           alignItems: 'center',
-          minHeight: '40px'
+          minHeight: '24px'
         }}
       >
         {/* タスク名 */}
         <div style={{ 
           fontWeight: '500',
           textAlign: 'left',
-          paddingLeft: `${level * 20}px`
+          paddingLeft: `${level * 15}px`,
+          fontSize: '14px'
         }}>
           {getTaskHierarchy(task, allTasks, level)}
         </div>
 
         {/* 担当者 */}
-        <div style={{ textAlign: 'center', minWidth: '80px' }}>
+        <div style={{ textAlign: 'center', minWidth: '60px', fontSize: '12px' }}>
           {assignee ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span className={`user-color ${assignee.color}`} />
               {assignee.name}
             </div>
           ) : (
@@ -82,14 +82,14 @@ const TaskItem: React.FC<TaskItemProps> = ({
         </div>
 
         {/* 残日数 */}
-        <div style={{ textAlign: 'center', minWidth: '80px' }}>
+        <div style={{ textAlign: 'center', minWidth: '60px', fontSize: '12px' }}>
           {task.remainingDays > 0 ? `残${task.remainingDays}日` : '期限切れ'}
         </div>
 
         {/* 進捗度 */}
-        <div style={{ textAlign: 'center', minWidth: '80px' }}>
-          <div style={{ marginBottom: '5px' }}>{task.progress}%</div>
-          <div className="progress-bar">
+        <div style={{ textAlign: 'center', minWidth: '60px', fontSize: '12px' }}>
+          <div style={{ marginBottom: '2px' }}>{task.progress}%</div>
+          <div className="progress-bar" style={{ height: '6px' }}>
             <div 
               className="progress-fill" 
               style={{ width: `${task.progress}%` }}
@@ -98,38 +98,18 @@ const TaskItem: React.FC<TaskItemProps> = ({
         </div>
 
         {/* 優先度 */}
-        <div style={{ textAlign: 'center', minWidth: '80px' }}>
-          <span className={`priority-badge priority-${task.priority}`}>
+        <div style={{ textAlign: 'center', minWidth: '60px', fontSize: '12px' }}>
+          <span className={`priority-badge priority-${task.priority}`} style={{ padding: '1px 6px', fontSize: '10px' }}>
             優先度{task.priority}
           </span>
         </div>
       </div>
 
-      {/* 現在作業中チェックボックス */}
-      {canEdit && task.assigneeId === currentUser?.id && (
-        <div style={{ 
-          marginTop: '10px', 
-          paddingTop: '10px', 
-          borderTop: '1px solid #eee',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px'
-        }}>
-          <input
-            type="checkbox"
-            checked={task.isWorkingOn}
-            onChange={handleWorkingOnToggle}
-            style={{ cursor: 'pointer' }}
-          />
-          <label style={{ cursor: 'pointer', fontSize: '14px' }}>
-            現在作業中
-          </label>
-        </div>
-      )}
+
 
       {/* 子タスク */}
       {childTasks.length > 0 && (
-        <div style={{ marginTop: '15px', paddingLeft: '20px' }}>
+        <div style={{ marginTop: '8px', paddingLeft: '15px' }}>
           {childTasks.map(childTask => (
             <TaskItem
               key={childTask.id}

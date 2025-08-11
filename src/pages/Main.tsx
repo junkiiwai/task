@@ -132,22 +132,28 @@ const Main: React.FC<MainProps> = ({
   return (
     <div className="container">
       {/* ヘッダー */}
-      <header style={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'center', 
+      <header className="header" style={{ 
         padding: '20px 0',
         borderBottom: '1px solid #ddd'
       }}>
-        <h1>Todo管理ツール</h1>
-        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-          <span>ログイン中: {currentUser?.name}</span>
-          <button className="btn btn-secondary" onClick={() => setShowUserSettings(true)}>
-            担当者設定
-          </button>
-          <button className="btn btn-danger" onClick={onLogout}>
-            ログアウト
-          </button>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          marginBottom: '10px'
+        }}>
+          <h1>タスク</h1>
+          <div className="header-buttons" style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+            <button className="btn btn-secondary" onClick={() => setShowUserSettings(true)}>
+              担当者設定
+            </button>
+            <button className="btn btn-danger" onClick={onLogout}>
+              ログアウト
+            </button>
+          </div>
+        </div>
+        <div className="user-info" style={{ fontSize: '14px', color: '#666' }}>
+          ログイン中: {currentUser?.name}
         </div>
       </header>
 
