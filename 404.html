@@ -22,5 +22,11 @@
     </script>
   </head>
   <body>
+    <script>
+      // リダイレクトが失敗した場合のフォールバック
+      setTimeout(function() {
+        window.location.href = '/task/';
+      }, 1000);
+    </script>
   </body>
 </html>

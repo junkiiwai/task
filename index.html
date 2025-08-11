@@ -32,5 +32,11 @@
   <body>
     <div id="root"></div>
     
+    <script>
+      // GitHub PagesでのSPAルーティング対応
+      if (window.location.pathname !== '/task/' && !window.location.pathname.endsWith('/task')) {
+        window.location.href = '/task/';
+      }
+    </script>
   </body>
 </html>
