@@ -42,7 +42,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
 
   return (
     <div className={taskClasses} style={{ 
-      padding: '8px',
+      padding: '0',
       border: '1px solid #ddd',
       borderRadius: '8px',
       backgroundColor: 'white',
@@ -65,13 +65,16 @@ const TaskItem: React.FC<TaskItemProps> = ({
           fontWeight: '500',
           textAlign: 'left',
           paddingLeft: `${level * 15}px`,
-          fontSize: '14px'
+          fontSize: '14px',
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis'
         }}>
           {getTaskHierarchy(task, allTasks, level)}
         </div>
 
         {/* 担当者 */}
-        <div style={{ textAlign: 'center', minWidth: '60px', fontSize: '12px' }}>
+        <div style={{ textAlign: 'center', minWidth: '45px', fontSize: '11px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {assignee ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               {assignee.name}
@@ -82,12 +85,12 @@ const TaskItem: React.FC<TaskItemProps> = ({
         </div>
 
         {/* 残日数 */}
-        <div style={{ textAlign: 'center', minWidth: '60px', fontSize: '12px' }}>
+        <div style={{ textAlign: 'center', minWidth: '45px', fontSize: '11px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {task.remainingDays > 0 ? `残${task.remainingDays}日` : '期限切れ'}
         </div>
 
         {/* 進捗度 */}
-        <div style={{ textAlign: 'center', minWidth: '60px', fontSize: '12px' }}>
+        <div style={{ textAlign: 'center', minWidth: '45px', fontSize: '11px' }}>
           <div style={{ marginBottom: '2px' }}>{task.progress}%</div>
           <div className="progress-bar" style={{ height: '6px' }}>
             <div 
@@ -98,8 +101,8 @@ const TaskItem: React.FC<TaskItemProps> = ({
         </div>
 
         {/* 優先度 */}
-        <div style={{ textAlign: 'center', minWidth: '60px', fontSize: '12px' }}>
-          <span className={`priority-badge priority-${task.priority}`} style={{ padding: '1px 6px', fontSize: '10px' }}>
+        <div style={{ textAlign: 'center', minWidth: '45px', fontSize: '11px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          <span className={`priority-badge priority-${task.priority}`} style={{ padding: '1px 4px', fontSize: '9px' }}>
             優先度{task.priority}
           </span>
         </div>

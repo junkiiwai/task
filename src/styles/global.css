@@ -214,13 +214,14 @@ body {
   }
   
   .header .header-buttons {
-    flex-direction: column;
+    flex-direction: row;
     gap: 5px;
   }
   
   .header .header-buttons .btn {
-    font-size: 12px;
-    padding: 6px 12px;
+    font-size: 11px;
+    padding: 4px 8px;
+    min-width: 60px;
   }
   
   .task-item .priority-badge {
@@ -233,6 +234,11 @@ body {
   }
   
   .task-item > div > div {
-    min-width: 50px !important;
+    min-width: 40px !important;
+  }
+  
+  .task-item .priority-badge {
+    font-size: 9px !important;
+    padding: 1px 3px !important;
   }
 }
