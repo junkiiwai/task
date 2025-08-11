@@ -77,5 +77,5 @@ export const getInProgressTasks = (tasks: Task[]): Task[] => {
 
 export const getTaskHierarchy = (task: Task, allTasks: Task[], level: number = 0): string => {
   if (level === 0) return task.name;
-  return '　'.repeat(level) + 'L' + task.name;
+  return '　'.repeat(level) + task.name;
 };

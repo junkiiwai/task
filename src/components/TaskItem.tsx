@@ -42,7 +42,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
 
   return (
     <div className={taskClasses} style={{ 
-      padding: '0',
+      padding: '5px',
       border: '1px solid #ddd',
       borderRadius: '8px',
       backgroundColor: 'white',
@@ -54,7 +54,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
         onClick={() => onTaskClick(task)}
         style={{ 
           display: 'grid',
-          gridTemplateColumns: '1fr auto auto auto auto',
+          gridTemplateColumns: '1fr auto auto auto auto auto auto',
           gap: '5px',
           alignItems: 'center',
           minHeight: '24px'
@@ -62,9 +62,9 @@ const TaskItem: React.FC<TaskItemProps> = ({
       >
         {/* タスク名 */}
         <div style={{ 
-          fontWeight: '500',
+          fontWeight: '600',
           textAlign: 'left',
-          paddingLeft: `${level * 15}px`,
+          paddingLeft: level === 0 ? '0px' : '0px',
           fontSize: '14px',
           whiteSpace: 'nowrap',
           overflow: 'hidden',
@@ -82,6 +82,20 @@ const TaskItem: React.FC<TaskItemProps> = ({
           ) : (
             <span style={{ color: '#666' }}>未設定</span>
           )}
+        </div>
+
+        {/* 期限（600px以上で表示） */}
+        <div className="due-date-column" style={{ textAlign: 'center', minWidth: '45px', fontSize: '11px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          {task.dueDate ? (
+            <span>{new Date(task.dueDate).toLocaleDateString('ja-JP', { month: 'numeric', day: 'numeric' })}</span>
+          ) : (
+            <span style={{ color: '#666' }}>-</span>
+          )}
+        </div>
+
+        {/* 所要時間（800px以上で表示） */}
+        <div className="hours-column" style={{ textAlign: 'center', minWidth: '45px', fontSize: '11px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          {task.estimatedHours > 0 ? `${task.estimatedHours}h` : '-'}
         </div>
 
         {/* 残日数 */}
@@ -112,7 +126,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
 
       {/* 子タスク */}
       {childTasks.length > 0 && (
-        <div style={{ marginTop: '8px', paddingLeft: '15px' }}>
+        <div style={{ marginTop: '0px', paddingLeft: '15px' }}>
           {childTasks.map(childTask => (
             <TaskItem
               key={childTask.id}

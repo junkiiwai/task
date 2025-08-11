@@ -170,7 +170,7 @@ const Main: React.FC<MainProps> = ({
       {/* プロジェクトゾーン */}
       <section className="card">
         <h2 className="section-title">プロジェクト</h2>
-        <div className="task-grid" style={{ display: 'grid', gap: '20px' }}>
+        <div className="task-grid" style={{ display: 'grid', gap: '0px' }}>
           {topLevelTasks.map(task => (
             <TaskItem
               key={task.id}
@@ -193,7 +193,7 @@ const Main: React.FC<MainProps> = ({
       {/* 完了ゾーン */}
       <section className="card">
         <h2 className="section-title">完了</h2>
-        <div className="task-grid" style={{ display: 'grid', gap: '20px' }}>
+        <div className="task-grid" style={{ display: 'grid', gap: '0px' }}>
           {completedTasks.map(task => (
             <TaskItem
               key={task.id}

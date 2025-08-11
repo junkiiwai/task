@@ -109,7 +109,7 @@ body {
 .section-title {
   font-size: 24px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 2px;
   color: #333;
 }
 
@@ -240,5 +240,39 @@ body {
   .task-item .priority-badge {
     font-size: 9px !important;
     padding: 1px 3px !important;
+  }
+  
+  .due-date-column,
+  .hours-column {
+    display: none !important;
+  }
+  
+  .task-item > div {
+    grid-template-columns: 1fr auto auto auto auto !important;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 799px) {
+  .due-date-column {
+    display: block !important;
+  }
+  
+  .hours-column {
+    display: none !important;
+  }
+  
+  .task-item > div {
+    grid-template-columns: 1fr auto auto auto auto auto !important;
+  }
+}
+
+@media (min-width: 800px) {
+  .due-date-column,
+  .hours-column {
+    display: block !important;
+  }
+  
+  .task-item > div {
+    grid-template-columns: 1fr auto auto auto auto auto auto !important;
   }
 }
