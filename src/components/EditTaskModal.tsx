@@ -233,7 +233,29 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                 onChange={(e) => setEditForm(prev => ({ ...prev, parentTaskId: e.target.value }))}
               >
                 <option value="">親タスクなし（最上位タスク）</option>
-                {topLevelTasks.map(t => (
+                {tasks.filter(t => t.id !== task.id).map(t => (
+                  <option key={t.id} value={t.id}>
+                    {t.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">子タスク</label>
+              <select
+                className="form-select"
+                multiple
+                value={editForm.childTaskIds}
+                onChange={(e) => {
+                  const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
+                  setEditForm(prev => ({ ...prev, childTaskIds: selectedOptions }));
+                }}
+                style={{ 
+                  maxHeight: '150px'
+                }}
+              >
+                {tasks.filter(t => t.id !== task.id).map(t => (
                   <option key={t.id} value={t.id}>
                     {t.name}
                   </option>
